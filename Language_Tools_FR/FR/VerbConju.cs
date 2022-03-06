@@ -1,111 +1,117 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
+
 
 namespace Language_Tools_FR
 {
-    public class VerbConjugation
+    public class FrVerb
     {
-        public class FrVerb {
-            public string verb { get; set; }
-            public string conjVerb { get; set; }
-            public string translation { get; set; }
-            public string translationJ { get; set; }
-            public VerbConjType conjType { get; set; }
-            public VerbTense tense { get; set; }
-            public VerbGender gender { get; set; }
-            public VerbSubject subject { get; set; }
-            public VerbNumber number { get; set; }
-            public bool pronom { get; set; }
+        public string verb { get; set; }
+        public string conjVerb { get; set; }
+        public string translation { get; set; }
+        public string translationJ { get; set; }
+        public VerbConjType conjType { get; set; }
+        public VerbTense tense { get; set; }
+        public VerbGender gender { get; set; }
+        public VerbSubject subject { get; set; }
+        public VerbNumber number { get; set; }
+        public bool pronom { get; set; }
 
-            [JsonIgnore]
-            public string expression // Not implimented
+        public FrVerb clone()
+        {
+            FrVerb clone1 = new FrVerb();
+            clone1.verb = this.verb;
+            clone1.conjVerb = this.conjVerb;
+            clone1.translation = this.translation;
+            clone1.translationJ = this.translationJ;
+            clone1.conjType = this.conjType;
+            clone1.tense = this.tense;
+            clone1.gender = this.gender;
+            clone1.subject = this.subject;
+            clone1.number = this.number;
+            return clone1;
+        }
+    }
+
+
+    public enum VerbSubject
+    {
+        undefined, firstPerson, secondPerson, thirdPerson
+    }
+    public enum VerbGender
+    {
+        undefined, masculin, féminin
+    }
+    public enum VerbNumber
+    {
+        undefined, singular, plural
+    }
+    public enum VerbConjType
+    {
+        undefined, other_irregulars, er_verbs, stem_changing_verbs
+    }
+    public enum VerbTense
+    {
+        undefined, Présent, Passé_composé, Impératif, Aller_infinitif, Imparfait, Futur, Conditionnel, Subjonctif, Plus_que_parfait, Conditionnel_passé, Subjonctif_passé
+    }
+    public class VerbConjugation :FrVerb
+    {
+
+      //  [JsonIgnore]
+        public string expression // Not implimented
+        {
+            get
             {
-                get {
-                    if (subject == VerbSubject.firstPerson && number == VerbNumber.singular)
+                if (subject == VerbSubject.firstPerson && number == VerbNumber.singular)
+                {
+                    var firstl = conjVerb.Substring(0, 1);
+                    if (firstl == "a" || firstl == "i" || firstl == "u" || firstl == "e" || firstl == "o")
                     {
-                        var firstl = conjVerb.Substring(0, 1);
-                        if (firstl == "a"|| firstl == "i" || firstl == "u" || firstl == "e" || firstl == "o")
-                        {
-                            return "j'" + conjVerb;
-                        }
-                        else
-                        {
-                            return "je " + conjVerb;
-                        }
+                        return "j'" + conjVerb;
                     }
                     else
                     {
-                        return typicalSubject + " "+conjVerb;
+                        return "je " + conjVerb;
                     }
                 }
-            }
-            public string tenseName
-            {
-                get { return tense.ToString().Replace("_"," "); }
-            }
-            
-            public string typicalSubject // Not implimented
-            {
-                get
+                else
                 {
-                    switch (subject)
-                    {
-                        case VerbSubject.firstPerson:
-                            if (number == VerbNumber.singular) return "je, j'";
-                            if (number == VerbNumber.plural) return "nous";
-                                break;
-                        case VerbSubject.secondPerson:
-                            if (number == VerbNumber.singular) return "tu";
-                            if (number == VerbNumber.plural) return "vous";
-                            break;
-                        case VerbSubject.thirdPerson:
-                            if (number == VerbNumber.singular&&gender==VerbGender.masculin) return "il";
-                            if (number == VerbNumber.singular && gender == VerbGender.féminin) return "elle";
-                            if (number == VerbNumber.plural && gender == VerbGender.masculin) return "ils";
-                            if (number == VerbNumber.plural && gender == VerbGender.féminin) return "elles";
-                            break;
-                    }
-                    return "";
+                    return typicalSubject + " " + conjVerb;
                 }
             }
-            public FrVerb clone()
+        }
+        public string tenseName
+        {
+            get { return tense.ToString().Replace("_", " "); }
+        }
+
+        public string typicalSubject // Not implimented
+        {
+            get
             {
-                FrVerb clone1 = new FrVerb();
-                clone1.verb = this.verb;
-                clone1.conjVerb = this.conjVerb;
-                clone1.translation = this.translation;
-                clone1.translationJ = this.translationJ;
-                clone1.conjType = this.conjType;
-                clone1.tense = this.tense;
-                clone1.gender = this.gender;
-                clone1.subject = this.subject;
-                clone1.number = this.number;
-                return clone1;
+                switch (subject)
+                {
+                    case VerbSubject.firstPerson:
+                        if (number == VerbNumber.singular) return "je, j'";
+                        if (number == VerbNumber.plural) return "nous";
+                        break;
+                    case VerbSubject.secondPerson:
+                        if (number == VerbNumber.singular) return "tu";
+                        if (number == VerbNumber.plural) return "vous";
+                        break;
+                    case VerbSubject.thirdPerson:
+                        if (number == VerbNumber.singular && gender == VerbGender.masculin) return "il";
+                        if (number == VerbNumber.singular && gender == VerbGender.féminin) return "elle";
+                        if (number == VerbNumber.plural && gender == VerbGender.masculin) return "ils";
+                        if (number == VerbNumber.plural && gender == VerbGender.féminin) return "elles";
+                        break;
+                }
+                return "";
             }
-        }
-        public enum VerbSubject
-        {
-            undefined,firstPerson,secondPerson,thirdPerson
-        }
-        public enum VerbGender
-        {
-            undefined, masculin, féminin
-        }
-        public enum VerbNumber
-        {
-            undefined, singular, plural
-        }
-        public enum VerbConjType
-        {
-            undefined, other_irregulars, er_verbs, stem_changing_verbs
-        }
-        public enum VerbTense
-        {
-            undefined, Présent, Passé_composé, Impératif, Aller_infinitif, Imparfait, Futur, Conditionnel, Subjonctif, Plus_que_parfait, Conditionnel_passé, Subjonctif_passé
         }
         public VerbConjugation()
         {

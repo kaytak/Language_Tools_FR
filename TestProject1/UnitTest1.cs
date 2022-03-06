@@ -38,5 +38,17 @@ namespace TestProject1
             string jsonString = JsonSerializer.Serialize(verb2);
             Assert.Pass();
         }
+
+        [Test]
+        public void Test2()
+        {
+            VerbConjugation vdata = new VerbConjugation();
+
+            //var oo = verb.list.Select(v=> new String[2] { v.verb,v.translation } ).Distinct().ToList();
+
+            List<FrVerb> vlist = vdata.list.Where(v => v.verb == "aller").ToList();
+            Assert.Pass();
+
+        }
     }
 }

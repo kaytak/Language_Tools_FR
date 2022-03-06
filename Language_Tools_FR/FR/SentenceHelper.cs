@@ -70,7 +70,7 @@ namespace Language_Tools_FR
         public string parse(int idx, VerbSubject vSubject,VerbGender vGender,VerbNumber vNumber,VerbTense vTense)
         {
             var sentence=_sentenceStore[idx];
-            List<VerbConjugation.FrVerb> vlist = _verbData.list.Where(v => v.verb == sentence.verb1 && v.tense == vTense && v.subject==vSubject && v.number==vNumber).ToList();
+            List<FrVerb> vlist = _verbData.list.Where(v => v.verb == sentence.verb1 && v.tense == vTense && v.subject==vSubject && v.number==vNumber).ToList();
             string output = "";
             foreach(var seg in sentence.segments)
             {
