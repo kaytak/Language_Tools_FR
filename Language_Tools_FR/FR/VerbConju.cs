@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Language_Tools_FR.FR
+namespace Language_Tools_FR
 {
     public class VerbConjugation
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Language_Tools_FR.FR.VerbConjugation;
+using static Language_Tools_FR.VerbConjugation;
 
-namespace Language_Tools_FR.FR
+namespace Language_Tools_FR
 {
     class LangSetFR
     {

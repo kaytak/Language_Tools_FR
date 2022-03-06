@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Language_Tools_FR.FR.VerbConjugation;
+using static Language_Tools_FR.VerbConjugation;
 
-namespace Language_Tools_FR.FR
+namespace Language_Tools_FR
 {
     public class SentenceHelper
     {
