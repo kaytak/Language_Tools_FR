@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Language_Tools_FR", "Langua
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{E7C79E11-7BC3-4F20-8E8F-5FC8DBADA03C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WasmInterface", "WasmInterface\WasmInterface.csproj", "{724CCF58-9353-43A5-97FC-F80814EB497E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E7C79E11-7BC3-4F20-8E8F-5FC8DBADA03C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7C79E11-7BC3-4F20-8E8F-5FC8DBADA03C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7C79E11-7BC3-4F20-8E8F-5FC8DBADA03C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724CCF58-9353-43A5-97FC-F80814EB497E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724CCF58-9353-43A5-97FC-F80814EB497E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724CCF58-9353-43A5-97FC-F80814EB497E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724CCF58-9353-43A5-97FC-F80814EB497E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

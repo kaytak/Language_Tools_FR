@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Language_Tools_FR
 {
@@ -19,6 +20,8 @@ namespace Language_Tools_FR
             public VerbSubject subject { get; set; }
             public VerbNumber number { get; set; }
             public bool pronom { get; set; }
+
+            [JsonIgnore]
             public string expression // Not implimented
             {
                 get {
