@@ -34,6 +34,7 @@ namespace WasmInterface
             //var oo = verb.list.Select(v=> new String[2] { v.verb,v.translation } ).Distinct().ToList();
 
             List<FrVerb> vlist = vdata.list.Where(v => v.verb == verb_word && v.tense==tense).ToList();
+         
 
             Console.WriteLine(vlist.Count());
 

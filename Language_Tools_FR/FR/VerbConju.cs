@@ -11,7 +11,7 @@ namespace Language_Tools_FR
     public class FrVerb
     {
         public string verb { get; set; }
-        public string conjVerb { get; set; }
+        public string? conjVerb { get; set; }
         public string translation { get; set; }
         public string translationJ { get; set; }
         public VerbConjType conjType { get; set; }
@@ -20,6 +20,7 @@ namespace Language_Tools_FR
         public VerbSubject subject { get; set; }
         public VerbNumber number { get; set; }
         public bool pronom { get; set; }
+        public string? SubjectVerb { get; set; }
 
         public FrVerb clone()
         {
@@ -33,6 +34,7 @@ namespace Language_Tools_FR
             clone1.gender = this.gender;
             clone1.subject = this.subject;
             clone1.number = this.number;
+            clone1.SubjectVerb = this.SubjectVerb;
             return clone1;
         }
     }
@@ -62,13 +64,17 @@ namespace Language_Tools_FR
     {
 
       //  [JsonIgnore]
-        public string expression // Not implimented
+        public string Get_expression(FrVerb vr) // Not implimented
         {
-            get
-            {
+           // get
+        //   {
+            var subject=vr.subject;
+            var number=vr.number;
+            var conjVerb=vr.conjVerb;
                 if (subject == VerbSubject.firstPerson && number == VerbNumber.singular)
                 {
-                    var firstl = conjVerb.Substring(0, 1);
+                string firstl="";
+                if (conjVerb.Length!=0)  firstl =  conjVerb.Substring(0, 1) ;
                     if (firstl == "a" || firstl == "i" || firstl == "u" || firstl == "e" || firstl == "o")
                     {
                         return "j'" + conjVerb;
@@ -80,19 +86,19 @@ namespace Language_Tools_FR
                 }
                 else
                 {
-                    return typicalSubject + " " + conjVerb;
+                    return get_typicalSubject(subject,number) + " " + conjVerb;
                 }
-            }
+          //  }
         }
         public string tenseName
         {
             get { return tense.ToString().Replace("_", " "); }
         }
 
-        public string typicalSubject // Not implimented
+        public string get_typicalSubject(VerbSubject subject, VerbNumber number) // Not implimented
         {
-            get
-            {
+          //  get
+         //   {
                 switch (subject)
                 {
                     case VerbSubject.firstPerson:
@@ -106,12 +112,15 @@ namespace Language_Tools_FR
                     case VerbSubject.thirdPerson:
                         if (number == VerbNumber.singular && gender == VerbGender.masculin) return "il";
                         if (number == VerbNumber.singular && gender == VerbGender.féminin) return "elle";
-                        if (number == VerbNumber.plural && gender == VerbGender.masculin) return "ils";
+                      if (number == VerbNumber.singular ) return "il";
+
+                       if (number == VerbNumber.plural && gender == VerbGender.masculin) return "ils";
                         if (number == VerbNumber.plural && gender == VerbGender.féminin) return "elles";
-                        break;
+                        if (number == VerbNumber.plural ) return "ils";
+                    break;
                 }
                 return "";
-            }
+           // }
         }
         public VerbConjugation()
         {
@@ -162,6 +171,7 @@ namespace Language_Tools_FR
                     if (vr1.gender == VerbGender.féminin && vr1.number == VerbNumber.singular) vr1.conjVerb = vrb[0..^6] + "e";
                     if (vr1.gender == VerbGender.féminin && vr1.number == VerbNumber.plural) vr1.conjVerb = vrb[0..^6] + "es";
                 }
+                vr1.SubjectVerb = Get_expression(vr1);
                 _verbs.Add(vr1.clone());
             }
             //}
