@@ -21,6 +21,7 @@ namespace Language_Tools_FR
         public VerbNumber number { get; set; }
         public bool pronom { get; set; }
         public string? SubjectVerb { get; set; }
+        public string? typSubject { get; set; }
 
         public FrVerb clone()
         {
@@ -35,6 +36,7 @@ namespace Language_Tools_FR
             clone1.subject = this.subject;
             clone1.number = this.number;
             clone1.SubjectVerb = this.SubjectVerb;
+            clone1.typSubject = this.typSubject; 
             return clone1;
         }
     }
@@ -172,6 +174,7 @@ namespace Language_Tools_FR
                     if (vr1.gender == VerbGender.féminin && vr1.number == VerbNumber.plural) vr1.conjVerb = vrb[0..^6] + "es";
                 }
                 vr1.SubjectVerb = Get_expression(vr1);
+                vr1.typSubject = this.get_typicalSubject(vr1.subject, vr1.number);
                 _verbs.Add(vr1.clone());
             }
             //}
